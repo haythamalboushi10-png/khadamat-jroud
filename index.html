@@ -1,4 +1,4 @@
- <!doctype html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8">
@@ -12,7 +12,7 @@
   <title>خدمات جيرود</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=3">
+  <link rel="stylesheet" href="styles.css?v=4">
 </head>
 <body>
   <a class="skip-link" href="#main">انتقل إلى المحتوى</a>
@@ -27,7 +27,7 @@
   <main id="main" tabindex="-1">
     <section id="home-view" class="view active" aria-labelledby="home-heading">
       <h2 id="home-heading" class="section-title">الرئيسية</h2>
-      <div id="home-ad" class="ad-slot"></div>
+      <div id="home-ad" class="ad-slot"><div class="ad-placeholder"><h3>ضع إعلانك هنا</h3><p>أعلن عن نشاطك التجاري في خدمات جيرود.</p></div></div>
       <section id="home-water-panel" class="panel" aria-labelledby="water-home-title">
         <div class="panel-heading"><h3 id="water-home-title">موعد المياه</h3><a href="#water" data-nav="water">التفاصيل</a></div>
         <label class="sr-only" for="home-neighborhood">اختر الحي</label><select id="home-neighborhood" class="field"></select>
@@ -42,26 +42,26 @@
         <div id="home-emergency" class="quick-contacts"></div>
       </section>
       <div id="home-shortcuts" class="shortcut-grid"></div>
-      <div id="home-inline-ad" class="ad-slot"></div>
+      <div id="home-inline-ad" class="ad-slot"><div class="ad-placeholder"><h3>ضع إعلانك هنا</h3><p>أعلن عن نشاطك التجاري في خدمات جيرود.</p></div></div>
     </section>
 
     <section id="water-view" class="view" aria-labelledby="water-heading">
       <h2 id="water-heading" class="section-title">المياه</h2>
       <section class="panel"><label for="water-neighborhood">الحي</label><select id="water-neighborhood" class="field"></select><div id="water-detail" class="compact-info"></div></section>
-      <div id="water-ad" class="ad-slot"></div>
+      <div id="water-ad" class="ad-slot"><div class="ad-placeholder"><h3>ضع إعلانك هنا</h3><p>أعلن عن نشاطك التجاري في خدمات جيرود.</p></div></div>
     </section>
 
     <section id="pharmacies-view" class="view" aria-labelledby="pharmacies-heading">
       <h2 id="pharmacies-heading" class="section-title">الصيدليات</h2>
       <div class="filter-row"><input id="pharmacy-search" class="field" type="search" placeholder="ابحث عن صيدلية أو حي" aria-label="البحث في الصيدليات"><select id="pharmacy-type" class="field" aria-label="نوع المناوبة"><option value="all">كل المناوبات</option><option value="day">نهاري</option><option value="night">ليلي</option><option value="24h">24 ساعة</option><option value="now">مناوبة الآن</option></select></div>
-      <div id="pharmacy-list" class="list"></div><div id="pharmacy-ad" class="ad-slot"></div>
+      <div id="pharmacy-list" class="list"></div><div id="pharmacy-ad" class="ad-slot"><div class="ad-placeholder"><h3>ضع إعلانك هنا</h3><p>أعلن عن نشاطك التجاري في خدمات جيرود.</p></div></div>
     </section>
 
     <section id="more-view" class="view" aria-labelledby="more-heading">
       <h2 id="more-heading" class="section-title">المزيد</h2>
-      <nav class="more-links" aria-label="أقسام إضافية"><button data-subview="emergency">الطوارئ والأرقام المهمة</button><button data-subview="ads">الإعلانات</button><button data-subview="settings">الإعدادات</button><button data-subview="about">حول التطبيق</button></nav>
+      <nav class="more-links" aria-label="أقسام إضافية"><button type="button" data-subview="emergency">الطوارئ والأرقام المهمة</button><button type="button" data-subview="ads">الإعلانات</button><button type="button" data-subview="settings">الإعدادات</button><button type="button" data-subview="about">حول التطبيق</button></nav>
       <section id="emergency-subview" class="subview"><h3>الطوارئ والأرقام المهمة</h3><div id="emergency-list" class="list"></div></section>
-      <section id="ads-subview" class="subview"><h3>الإعلانات</h3><div id="footer-ad" class="ad-slot"></div><div id="ads-list" class="list"></div></section>
+      <section id="ads-subview" class="subview"><h3>الإعلانات</h3><div id="footer-ad" class="ad-slot"><div class="ad-placeholder"><h3>ضع إعلانك هنا</h3><p>أعلن عن نشاطك التجاري في خدمات جيرود.</p></div></div><div id="ads-list" class="list"></div></section>
       <section id="settings-subview" class="subview"><h3>الإعدادات</h3><div class="panel settings-panel"><label for="theme-select">المظهر</label><select id="theme-select" class="field"><option value="system">حسب الجهاز</option><option value="light">فاتح</option><option value="dark">داكن</option></select><label for="settings-neighborhood">الحي الافتراضي</label><select id="settings-neighborhood" class="field"></select><button id="install-settings" class="secondary-button" type="button">إضافة إلى الشاشة الرئيسية</button><button id="clear-cache" class="secondary-button" type="button">مسح البيانات المحفوظة</button></div></section>
       <section id="about-subview" class="subview"><h3>حول التطبيق</h3><div class="panel"><p>دليل الخدمات اليومية في مدينة جيرود.</p><p class="muted">قد تتغير المعلومات الميدانية. تحقق من التفاصيل عند الحاجة، خصوصاً في الحالات الطارئة.</p></div></section>
     </section>
@@ -73,5 +73,20 @@
   <script src="config.js" defer></script>
   <script src="data.js" defer></script>  
   <script src="app.js" defer></script>
+  <script>
+    document.addEventListener('click', function(e) {
+      const nav = e.target.closest('[data-nav]');
+      if (nav) {
+        const name = nav.dataset.nav;
+        document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.id === name + '-view'));
+        document.querySelectorAll('[data-nav]').forEach(b => b.classList.toggle('active', b.dataset.nav === name));
+      }
+      const sub = e.target.closest('[data-subview]');
+      if (sub) {
+        const name = sub.dataset.subview;
+        document.querySelectorAll('.subview').forEach(v => v.classList.toggle('active', v.id === name + '-subview'));
+      }
+    });
+  </script>
 </body>
 </html>
