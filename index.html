@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#245a83">
+  <meta name="description" content="دليل الخدمات اليومية في مدينة جيرود">
+  <meta name="color-scheme" content="light dark">
+  <title>خدمات جيرود</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">انتقل إلى المحتوى</a>
+  <header class="app-header">
+    <div class="brand">
+      <img id="app-logo" src="icons/icon.svg" width="42" height="42" alt="">
+      <div><h1 id="app-name">خدمات جيرود</h1><p id="welcome-message">خدمات مدينتك في مكان واحد</p></div>
+    </div>
+    <button class="icon-button" id="refresh-button" type="button" aria-label="تحديث البيانات" title="تحديث البيانات"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5M5.6 9A7 7 0 0 1 18 6l2 6M4 12l2 6a7 7 0 0 0 12.4-3"/></svg></button>
+  </header>
+  <div id="status-bar" class="status-bar" role="status" aria-live="polite"></div>
+  <main id="main" tabindex="-1">
+    <section id="home-view" class="view active" aria-labelledby="home-heading">
+      <h2 id="home-heading" class="section-title">الرئيسية</h2>
+      <div id="home-ad" class="ad-slot"></div>
+      <section id="home-water-panel" class="panel" aria-labelledby="water-home-title">
+        <div class="panel-heading"><h3 id="water-home-title">موعد المياه</h3><a href="#water" data-nav="water">التفاصيل</a></div>
+        <label class="sr-only" for="home-neighborhood">اختر الحي</label><select id="home-neighborhood" class="field"></select>
+        <div id="home-water" class="compact-info"><p class="muted">جارٍ تحميل المعلومات…</p></div>
+      </section>
+      <section id="home-pharmacy-panel" class="panel" aria-labelledby="pharmacy-home-title">
+        <div class="panel-heading"><h3 id="pharmacy-home-title">الصيدليات المناوبة</h3><a href="#pharmacies" data-nav="pharmacies">عرض الكل</a></div>
+        <div id="home-pharmacies" class="list"></div>
+      </section>
+      <section id="home-emergency-panel" class="panel" aria-labelledby="emergency-home-title">
+        <div class="panel-heading"><h3 id="emergency-home-title">أرقام مهمة</h3><a href="#more" data-nav="more">المزيد</a></div>
+        <div id="home-emergency" class="quick-contacts"></div>
+      </section>
+      <div id="home-shortcuts" class="shortcut-grid"></div>
+      <div id="home-inline-ad" class="ad-slot"></div>
+    </section>
+
+    <section id="water-view" class="view" aria-labelledby="water-heading">
+      <h2 id="water-heading" class="section-title">المياه</h2>
+      <section class="panel"><label for="water-neighborhood">الحي</label><select id="water-neighborhood" class="field"></select><div id="water-detail" class="compact-info"></div></section>
+      <div id="water-ad" class="ad-slot"></div>
+    </section>
+
+    <section id="pharmacies-view" class="view" aria-labelledby="pharmacies-heading">
+      <h2 id="pharmacies-heading" class="section-title">الصيدليات</h2>
+      <div class="filter-row"><input id="pharmacy-search" class="field" type="search" placeholder="ابحث عن صيدلية أو حي" aria-label="البحث في الصيدليات"><select id="pharmacy-type" class="field" aria-label="نوع المناوبة"><option value="all">كل المناوبات</option><option value="day">نهاري</option><option value="night">ليلي</option><option value="24h">24 ساعة</option><option value="now">مناوبة الآن</option></select></div>
+      <div id="pharmacy-list" class="list"></div><div id="pharmacy-ad" class="ad-slot"></div>
+    </section>
+
+    <section id="more-view" class="view" aria-labelledby="more-heading">
+      <h2 id="more-heading" class="section-title">المزيد</h2>
+      <nav class="more-links" aria-label="أقسام إضافية"><button data-subview="emergency">الطوارئ والأرقام المهمة</button><button data-subview="ads">الإعلانات</button><button data-subview="settings">الإعدادات</button><button data-subview="about">حول التطبيق</button></nav>
+      <section id="emergency-subview" class="subview"><h3>الطوارئ والأرقام المهمة</h3><div id="emergency-list" class="list"></div></section>
+      <section id="ads-subview" class="subview"><h3>الإعلانات</h3><div id="footer-ad" class="ad-slot"></div><div id="ads-list" class="list"></div></section>
+      <section id="settings-subview" class="subview"><h3>الإعدادات</h3><div class="panel settings-panel"><label for="theme-select">المظهر</label><select id="theme-select" class="field"><option value="system">حسب الجهاز</option><option value="light">فاتح</option><option value="dark">داكن</option></select><label for="settings-neighborhood">الحي الافتراضي</label><select id="settings-neighborhood" class="field"></select><button id="install-settings" class="secondary-button" type="button">إضافة إلى الشاشة الرئيسية</button><button id="clear-cache" class="secondary-button" type="button">مسح البيانات المحفوظة</button></div></section>
+      <section id="about-subview" class="subview"><h3>حول التطبيق</h3><div class="panel"><p>دليل الخدمات اليومية في مدينة جيرود.</p><p class="muted">قد تتغير المعلومات الميدانية. تحقق من التفاصيل عند الحاجة، خصوصاً في الحالات الطارئة.</p></div></section>
+    </section>
+  </main>
+  <footer class="app-footer"><div id="footer-status" class="muted"></div><p>طُوّر بواسطة هيثم البوشي</p></footer>
+  <nav class="bottom-nav" aria-label="التنقل الرئيسي"><button class="nav-item active" data-nav="home" type="button"><span class="nav-icon">⌂</span><span>الرئيسية</span></button><button class="nav-item" data-nav="water" type="button"><span class="nav-icon">◷</span><span>المياه</span></button><button class="nav-item" data-nav="pharmacies" type="button"><span class="nav-icon">＋</span><span>الصيدليات</span></button><button class="nav-item" data-nav="more" type="button"><span class="nav-icon">•••</span><span>المزيد</span></button></nav>
+  <dialog id="install-dialog" class="dialog"><div class="dialog-content"><h2 id="install-title">هل تريد إضافة خدمات جيرود إلى الشاشة الرئيسية؟</h2><p id="install-copy">افتح التطبيق بسرعة من شاشة هاتفك.</p><ol id="install-steps" hidden><li>اضغط على زر المشاركة في Safari.</li><li>اختر «إضافة إلى الشاشة الرئيسية».</li></ol><div class="dialog-actions"><button id="install-accept" class="primary-button" type="button">إضافة إلى الشاشة الرئيسية</button><button id="install-dismiss" class="secondary-button" type="button">ليس الآن</button></div></div></dialog>
+  <div id="update-banner" class="update-banner" hidden><span>يتوفر تحديث جديد</span><button id="update-button" type="button">تحديث التطبيق</button></div>
+  <script src="data.js" defer></script><script src="app.js" defer></script>
+</body>
+</html>
