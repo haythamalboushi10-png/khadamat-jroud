@@ -16,7 +16,15 @@
   function parseCSV(csv) { const rows=[]; let row=[], field='', quoted=false; csv=String(csv??'').replace(/^\uFEFF/,''); for(let i=0;i<csv.length;i++){const c=csv[i]; if(quoted){if(c==='"'&&csv[i+1]==='"'){field+='"';i++;}else if(c==='"'){quoted=false;}else field+=c;}else{if(c==='"'&&field===''){quoted=true;}else if(c===','){row.push(field);field='';}else if(c==='\n'){row.push(field.replace(/\r$/,''));if(row.some(v=>v.trim()!==''))rows.push(row);row=[];field='';}else field+=c;}} row.push(field.replace(/\r$/,'')); if(row.some(v=>v.trim()!==''))rows.push(row); if(!rows.length)return []; const headers=rows.shift().map(h=>h.trim()); return rows.map(cols=>{const o={};headers.forEach((h,i)=>o[h]=cols[i]??'');return o;}); }
   async function fetchTab(tab){const url=`https://docs.google.com/spreadsheets/d/${encodeURIComponent(CFG.SHEET_ID)}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(tab)}`; const controller=new AbortController(); const timer=setTimeout(()=>controller.abort(),CFG.FETCH_TIMEOUT_MS); try{const r=await fetch(url,{signal:controller.signal,cache:'no-store'});if(!r.ok)throw new Error(`HTTP ${r.status}`);const csv=await r.text();if(/<!doctype html|<html/i.test(csv.slice(0,500)))throw new Error('تعذر قراءة الشيت');return parseCSV(csv);}finally{clearTimeout(timer);}}
   async function fetchAll(){if(!CFG.SHEET_ID||CFG.SHEET_ID.includes('PUT_'))throw new Error('لم يتم إعداد مصدر Google Sheets');const pairs=await Promise.all(CFG.DATA_TABS.map(async tab=>[tab,await fetchTab(tab)]));return Object.fromEntries(pairs);}
-  function getSettings(rows){const result={};(rows||[]).forEach(r=>{if(r.key)result[String(r.key).trim()]=String(r.value??'').trim();});return result;}
+ function getSettings(rows) {
+  const result = {};
+  (rows || []).forEach(r => {
+    const key = String(r.key ?? '').replace(/^\uFEFF/, '').trim().toLowerCase();
+    const value = String(r.value ?? '').trim();
+    if (key) result[key] = value;
+  });
+  return result;
+}
   function validateAndApply(raw){const settings=getSettings(raw.Settings);state.settings=settings;state.data=raw;state.neighborhoods=(raw.Neighborhoods||[]).filter(r=>text(r.name)&&bool(r.active)).sort((a,b)=>(Number(a.sort_order)||999)-(Number(b.sort_order)||999)).map(r=>text(r.name));state.pharmacyRows=(raw.Pharmacies||[]).filter(r=>text(r.name)&&bool(r.active));state.emergencyRows=(raw.Emergency||[]).filter(r=>text(r.name)&&bool(r.active)&&text(r.phone));state.ads=(raw.Ads||[]).filter(r=>bool(r.active));applySettings();renderAll();}
   function applySettings(){const s=state.settings;document.title=text(s.app_name,'خدمات جيرود');$('app-name').textContent=text(s.app_name,'خدمات جيرود');$('welcome-message').textContent=text(s.welcome_message,'خدمات مدينتك في مكان واحد');$('install-title').textContent=text(s.install_prompt_title,'هل تريد إضافة خدمات جيرود إلى الشاشة الرئيسية؟');$('install-copy').textContent=text(s.install_prompt_copy,'افتح التطبيق بسرعة من شاشة هاتفك.');$('install-accept').textContent=text(s.install_prompt_add,'إضافة إلى الشاشة الرئيسية');$('install-dismiss').textContent=text(s.install_prompt_later,'ليس الآن');const logo=escapeURL(s.logo_url);if(logo)$('app-logo').src=logo;document.documentElement.style.setProperty('--primary','#16a36a');}
   function currentNeighborhood(){return localStorage.getItem('jeroud-neighborhood')||state.neighborhoods[0]||'';}
